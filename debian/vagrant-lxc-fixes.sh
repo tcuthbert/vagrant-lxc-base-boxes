@@ -6,7 +6,7 @@ source common/utils.sh
 
 # Fixes some networking issues
 # See https://github.com/fgrehm/vagrant-lxc/issues/91 for more info
-if ! $(grep -q 'ip6-allhosts' ${ROOTFS}/etc/hosts); then
+if [ ${RELEASE} -ne "xenial" ] && ! $(grep -q 'ip6-allhosts' ${ROOTFS}/etc/hosts); then
   log "Adding ipv6 allhosts entry to container's /etc/hosts"
   echo 'ff02::3 ip6-allhosts' >> ${ROOTFS}/etc/hosts
 fi
